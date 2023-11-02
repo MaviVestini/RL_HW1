@@ -93,7 +93,7 @@ def pendulum_dyn(x,u):
     u = np.clip(u, -2, 2)[0]
 
     # TODO
-    newthdot = thdot + dt*((3*g*np.sin(th))/(2*l) + (3*u)/(m*l*l))
+    newthdot = thdot + dt*(((3*g*np.sin(th))/(2*l)) + ((3*u)/(m*l*l)))
     newth = th + newthdot*dt
     
     newthdot = np.clip(newthdot, -8, 8)
