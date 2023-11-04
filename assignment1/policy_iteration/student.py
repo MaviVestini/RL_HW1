@@ -8,7 +8,7 @@ def reward_function(s, env_size):
     r = 0
 
     # Check if s is the end state change r to 1
-    if (s == env_size -1).all():
+    if (s == env_size-1).all():
         r = 1
     
     return r
@@ -46,13 +46,13 @@ def transition_probabilities(env, s, a, env_size, directions, obstacles):
     
     # Get s_prime in case of perpendicular action -90 degree
     s_prime = check_feasibility(s + directions[(a-1)%4], s, env_size, obstacles)
-    prob_next_state[s_prime[0], s_prime[1]] = 1/3
+    prob_next_state[s_prime[0], s_prime[1]] += 1/3
 
     # Get s_prime in case of action a
     s_prime = check_feasibility(s + directions[a], s, env_size, obstacles)
-    prob_next_state[s_prime[0], s_prime[1]] = 1/3
+    prob_next_state[s_prime[0], s_prime[1]] += 1/3
 
     # Get s_prime in case of perpendicular action +90 degree
     s_prime = check_feasibility(s + directions[(a+1)%4], s, env_size, obstacles)
-    prob_next_state[s_prime[0], s_prime[1]] = 1/3
+    prob_next_state[s_prime[0], s_prime[1]] += 1/3
     return prob_next_state
