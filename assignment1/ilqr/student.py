@@ -46,7 +46,7 @@ class ILqr:
             Kt = -np.linalg.inv(Rt+Bt.T@Pt1@Bt)@Bt.T@Pt1@At
             # TODO
             pt = qt + Kt.T@(Rt@kt + rt) + (At + Bt@Kt).T@pt1 + (At + Bt@Kt).T@Pt1@Bt@kt
-            Pt = (Qt + Kt.T@Rt@Kt + (At + Bt@Kt).T@Pt1@(At+Bt@Kt))
+            Pt = Qt + Kt.T@Rt@Kt + (At + Bt@Kt).T@Pt1@(At+Bt@Kt)
 
             pt1 = pt
             Pt1 = Pt
@@ -65,7 +65,7 @@ class ILqr:
         u_seq_hat = np.array(u_seq)
         for t in range(len(u_seq)):
             # TODO
-            control = k_seq[t] + K_seq[t]@(x_seq[t]-x_seq[t-1])
+            control = k_seq[t] + K_seq[t]@(x_seq_hat[t]-x_seq[t])
             
             # clip controls to the actual range from gymnasium
             u_seq_hat[t] = np.clip(u_seq[t] + control,-2,2)
@@ -93,7 +93,7 @@ def pendulum_dyn(x,u):
     u = np.clip(u, -2, 2)[0]
 
     # TODO
-    newthdot = thdot + dt*(((3*g*np.sin(th))/(2*l)) + ((3*u)/(m*l*l)))
+    newthdot = thdot + dt*(((3*g*np.sin(th))/(2*l)) + ((3.0*u)/(m*l*l)))
     newth = th + newthdot*dt
     
     newthdot = np.clip(newthdot, -8, 8)

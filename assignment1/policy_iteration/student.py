@@ -31,10 +31,8 @@ def check_feasibility(s_prime, s, env_size, obstacles):
     
     # Check if s_prime inside env space
     if (s_prime >= 0).all() and (s_prime < env_size).all():
-        # Check that there isn't any obstacle in the position
-        if not obstacles[s_prime[0], s_prime[1]]:
-            # both conditions are verified so it's possible to move to s_prime
-            s = s_prime
+        # So it's possible to move to s_prime
+        s = s_prime
 
     return s
 
