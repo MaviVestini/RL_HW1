@@ -29,7 +29,7 @@ def reward_probabilities(env_size):
 # If it is a possible state return s_prime, otherwise return s
 def check_feasibility(s_prime, s, env_size, obstacles):
     
-    # Check if s_prime inside env space
+    # Check if s_prime inside env space (i.e the new state is feasible)
     if (s_prime >= 0).all() and (s_prime < env_size).all():
         # So it's possible to move to s_prime
         s = s_prime
